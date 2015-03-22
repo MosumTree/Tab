@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Tab切换</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+ul {list-style: none;}
+* {
+	margin: 0;
+	padding: 0;
+	
+}
+a {
+	color: #000;
+	text-decoration: none;
+}
+body{
+	font-family: "微软雅黑";
+	font-size: 14px;
+}
+#tab {
+	height: auto;
+	width: 300px;
+	border: 1px solid #ccc;
+}
+.top {
+	height: 30px;
+	background-color: #aaa;
+	border-bottom: 1px solid #ccc;
+}
+#tab ul li {
+	width: 58px;
+	height: 24px;
+	float: left;
+	text-align: center;
+	padding-top: 5px;
+}
+.select {
+	background-color: #fff;
+	font-weight: bold;
+	border: 1px solid #000000;
+	border-bottom-color: #fff;
+}
+#tab ul li a:hover {
+	color: #FF8000;
+}
+
+.test {
+	width: 100px;
+	height: 20px;
+	background-color: #000;
+}
+</style>
+<script type="text/javascript">
+	window.onload = function(){
+
+		var index = 0;
+		var timer = null;
+
+		var titles = document.getElementsByTagName("li");
+		var cons = document.getElementsByTagName("p");
+
+		for(var j=0; j<titles.length; j++){
+			titles[j].id = j;
+			titles[j].onmouseover = function(){
+				clearTimeout(timer);
+				changeType(this.id);
+		}
+		titles[j].onmouseout = function(){
+			timer = setInterval(autoPlay,2000);
+		}
+		}
+
+		if(timer){
+			clearInterval(timer);
+			timer = null;
+		}
+
+		timer = setInterval(autoPlay,2000);
+
+		function changeType(curindex){
+			for(var i=0; i<titles.length; i++){
+				titles[i].className = "";
+				cons[i].style.display = "none";
+			}
+			
+			titles[curindex].className = "select";
+			cons[curindex].style.display = "block";
+			index = curindex;
+		}
+
+		function autoPlay(){
+			index++;
+			if(index >= titles.length){
+				index = 0;
+			}
+			changeType(index);
+		}
+	}
+</script>
+</head>
+<body>
+    <div id="tab">
+        <div class="top">
+	    	<ul>
+	    		<li class="select"><a>公告</a></li>
+	    		<li><a>规则</a></li>
+	    		<li><a>论坛</a></li>
+	    		<li><a>安全</a></li>
+	    		<li><a>公益</a></li>
+	    	</ul>
+    	</div>
+    	<div class="content">
+    		<p style="display:block">
+    			英国威廉王子会见马云1
+    		</p>
+    		<p style="display:none">
+    			英国威廉王子会见马云2
+    		</p>
+    		<p style="display:none">
+    			英国威廉王子会见马云3
+    		</p>
+    		<p style="display:none">
+    			英国威廉王子会见马云4
+    		</p>
+    		<p style="display:none">
+    			英国威廉王子会见马云5
+    		</p>
+    	</div>
+    </div>
+
+
+</body>
+</html>
